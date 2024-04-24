@@ -64,7 +64,6 @@ function capToFront(string) {
       lowercaseLetters += string[i];
     }
   }
-
   // Construir el string resultante
   return uppercaseLetters + lowercaseLetters;
 }
@@ -74,18 +73,52 @@ function asAmirror(frase) {
   // La diferencia es que cada palabra estará escrita al inverso.
   // [EJEMPLO]: "The Henry Challenge is close!"  ---> "ehT yrneH egnellahC si !esolc"
   // Tu código:
+ 
+  // Dividir la frase en palabras usando split(' ')
+  let palabras = frase.split(' ');
+  // Crear un array para almacenar las palabras invertidas
+  let palabrasInvertidas = [];
+  // Iterar sobre cada palabra en el array de palabras
+  for (let palabra of palabras) {
+      // Invertir el orden de los caracteres de la palabra y agregarla al array de palabras invertidas
+      palabrasInvertidas.push(palabra.split('').reverse().join(''));
+  }
+  let fraseInvertida = palabrasInvertidas.join(' ');
+  return fraseInvertida;
 }
 
 function capicua(numero) {
   // Si el número que recibes es capicúa debes retornar el string: "Es capicua".
   // Caso contrario: "No es capicua".
   // Tu código:
+   // Convertir el número a una cadena de caracteres
+   let numStr = numero.toString();
+   // Obtener la longitud del número
+   let longitud = numStr.length;
+   for (let i = 0; i < longitud / 2; i++) {
+    // Comparar el dígito actual con su dígito correspondiente en el extremo opuesto
+    if (numStr[i] !== numStr[longitud - 1 - i]) {
+        // Si los dígitos no son iguales, retornar "No es capicua"
+        return "No es capicua";
+    }
+}
+// Si todos los dígitos coinciden, retornar "Es capicua"
+return "Es capicua";
 }
 
 function deleteAbc(string) {
   // Tu tarea es eliminar las letras "a", "b" y "c" del string recibido.
   // Retorna el string sin estas letras.
   // Tu código:
+  const eliminar = ['a','b','c'];
+  let fraseMod = '';
+  
+  for (let i=0;i<string.length;i++){
+    if(!eliminar.includes(string[i])){
+      fraseMod += string[i];
+    }
+  }
+  return fraseMod;
 }
 
 function sortArray(arrayOfStrings) {
@@ -94,6 +127,7 @@ function sortArray(arrayOfStrings) {
   // de la longitud de cada string.
   // [EJEMPLO]: ["You", "are", "beautiful", "looking"]  ---> [“You", "are", "looking", "beautiful"]
   // Tu código:
+  return arrayOfStrings.sort((a, b) => a.length - b.length);
 }
 
 function buscoInterseccion(array1, array2) {
@@ -103,8 +137,22 @@ function buscoInterseccion(array1, array2) {
   // Si no tienen elementos en común, retornar un arreglo vacío.
   // [PISTA]: los arreglos no necesariamente tienen la misma longitud.
   // Tu código:
-}
+  let interseccion = [];
 
+  // Iterar sobre cada elemento del primer arreglo
+  for (let i = 0; i < array1.length; i++) {
+      // Verificar si el elemento actual está presente en el segundo arreglo
+      if (array2.includes(array1[i])) {
+          // Si está presente, agregarlo al arreglo de intersección si aún no está ahí
+          if (!interseccion.includes(array1[i])) {
+              interseccion.push(array1[i]);
+          }
+      }
+  }
+
+  // Retornar el arreglo de intersección
+  return interseccion;
+}
 /*⚠️ NO MODIFIQUES NADA DEBAJO DE ESTO ⚠️*/
 module.exports = {
   deObjetoAarray,
